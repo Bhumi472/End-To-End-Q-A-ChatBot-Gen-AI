@@ -1,81 +1,63 @@
 import streamlit as st
-
-from langchain_community.llms import Ollama
-from langchain_core.prompts import ChatPromptTemplate
+import openai
+from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+import os
 
-# Prompt Template
-prompt = ChatPromptTemplate.from_messages(
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+## Langsmith Tracking
+os.environ["LANGCHAIN_API_KEY"]=os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_TRACING_V2"]="true"
+os.environ["LANGCHAIN_PROJECT"]="Simple Q&A Chatbot With OPENAI"
+
+## Prompt Template
+prompt=ChatPromptTemplate.from_messages(
     [
-        (
-            "system",
-            "You are a helpful AI assistant. Answer the user's questions clearly and accurately."
-        ),
-        (
-            "user",
-            "Question: {question}"
-        )
+        ("system","You are a helpful massistant . Please  repsonse to the user queries"),
+        ("user","Question:{question}")
     ]
 )
 
-# Function to generate response
-def generate_response(question, model_name, temperature):
+def generate_response(question,api_key,engine,temperature,max_tokens):
+    openai.api_key=api_key
 
-    llm = Ollama(
-        model=model_name,
-        temperature=temperature
-    )
+    llm=ChatOpenAI(model=engine)
+    output_parser=StrOutputParser()
+    chain=prompt|llm|output_parser
+    answer=chain.invoke({'question':question})
+    return answer
 
-    output_parser = StrOutputParser()
-
-    chain = prompt | llm | output_parser
-
-    return chain.invoke({"question": question})
+## #Title of the app
+st.title("Enhanced Q&A Chatbot With OpenAI")
 
 
-# Streamlit UI
-st.set_page_config(
-    page_title="Q&A Chatbot with Ollama",
-    page_icon="🤖"
-)
 
-st.title("🤖 Q&A Chatbot with Ollama")
+## Sidebar for settings
+st.sidebar.title("Settings")
+api_key=st.sidebar.text_input("Enter your Open AI API Key:",type="password")
 
-st.sidebar.header("Settings")
+## Select the OpenAI model
+engine=st.sidebar.selectbox("Select Open AI model",["gpt-4o","gpt-4-turbo","gpt-4"])
 
-# Model Selection
-model = st.sidebar.selectbox(
-    "Select Model",
-    ["mistral"]
-)
+## Adjust response parameter
+temperature=st.sidebar.slider("Temperature",min_value=0.0,max_value=1.0,value=0.7)
+max_tokens = st.sidebar.slider("Max Tokens", min_value=50, max_value=300, value=150)
 
-# Temperature
-temperature = st.sidebar.slider(
-    "Temperature",
-    min_value=0.0,
-    max_value=1.0,
-    value=0.7,
-    step=0.1
-)
+## MAin interface for user input
+st.write("Goe ahead and ask any question")
+user_input=st.text_input("You:")
 
-st.write("Ask me anything!")
+if user_input and api_key:
+    response=generate_response(user_input,api_key,engine,temperature,max_tokens)
+    st.write(response)
 
-user_input = st.text_input("Your Question")
+elif user_input:
+    st.warning("Please enter the OPen AI aPi Key in the sider bar")
+else:
+    st.write("Please provide the user input")
 
-if st.button("Generate Response"):
 
-    if user_input.strip():
-
-        with st.spinner("Generating response..."):
-
-            response = generate_response(
-                user_input,
-                model,
-                temperature
-            )
-
-        st.success("Response")
-        st.write(response)
-
-    else:
-        st.warning("Please enter a question.")
