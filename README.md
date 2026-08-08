@@ -1,20 +1,10 @@
 # 🤖 End-to-End Q&A ChatBot Gen AI
 
-<div align="center">
+### 🚀 End-to-End Question Answering ChatBot using LangChain, Streamlit, OpenAI, Groq & Ollama
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-App-red?style=for-the-badge&logo=streamlit)
-![LangChain](https://img.shields.io/badge/LangChain-Framework-green?style=for-the-badge)
-![OpenAI](https://img.shields.io/badge/OpenAI-GPT-black?style=for-the-badge)
-![Ollama](https://img.shields.io/badge/Ollama-Local_LLM-orange?style=for-the-badge)
-
-### 🚀 End-to-End Question Answering ChatBot using LangChain, Streamlit, OpenAI & Ollama
-
-Build intelligent Q&A chatbots using cloud-based OpenAI models or completely local open-source models powered by Ollama.
+Build intelligent Q&A chatbots using cloud-based **OpenAI and Groq models** or completely local open-source models powered by **Ollama**.
 
 ⭐ If you find this project helpful, don't forget to star the repository!
-
-</div>
 
 ---
 
@@ -22,10 +12,11 @@ Build intelligent Q&A chatbots using cloud-based OpenAI models or completely loc
 
 This project demonstrates how to build modern AI-powered Question & Answer chatbots using **LangChain** and **Streamlit**.
 
-The repository contains two implementations:
+The repository contains multiple implementations using different LLM providers:
 
-- 🌐 OpenAI-based chatbot using GPT models
-- 💻 Local chatbot using Ollama and open-source LLMs (Mistral)
+* 🌐 **OpenAI-based chatbot** using GPT models
+* ⚡ **Groq-based chatbot** using Llama models
+* 💻 **Local chatbot** using Ollama and open-source LLMs such as Mistral
 
 The applications provide a simple interface for asking questions and receiving AI-generated responses.
 
@@ -33,15 +24,17 @@ The applications provide a simple interface for asking questions and receiving A
 
 # ✨ Features
 
-- 🤖 AI Question Answering
-- 🌐 OpenAI GPT Integration
-- 💻 Ollama Local LLM Support
-- 📱 Streamlit Web Interface
-- ⚡ LangChain Prompt Templates
-- 🔄 Output Parsing
-- 🎛 Adjustable Temperature
-- 🔒 Local AI Execution (Ollama)
-- ☁ Cloud AI Execution (OpenAI)
+* 🤖 AI Question Answering
+* 🌐 OpenAI GPT Integration
+* ⚡ Groq LLM Integration
+* 💻 Ollama Local LLM Support
+* 📱 Streamlit Web Interface
+* ⚡ LangChain Prompt Templates
+* 🔄 Output Parsing
+* 🎛 Adjustable Temperature
+* 🔒 Local AI Execution with Ollama
+* ☁ Cloud AI Execution with OpenAI & Groq
+* 🔑 API Key Authentication for Cloud Models
 
 ---
 
@@ -50,15 +43,15 @@ The applications provide a simple interface for asking questions and receiving A
 ```text
 End-To-End-Q-A-ChatBot-Gen-AI/
 │
-├── 2-OpenAI Chatbot/
-│   ├── app.py
-│   └── requirements.txt
+├── README.md
+├── requirements.txt
 │
-├── 3-Ollama Chatbot/
-│   ├── app.py
-│   └── requirements.txt
+├── 2-OpenAI Chatbot
+│   └── app.py
 │
-└── README.md
+├── groq-chatbot.py
+│
+└── ollama chatbot.py
 ```
 
 ---
@@ -69,16 +62,40 @@ End-To-End-Q-A-ChatBot-Gen-AI/
 
 Features
 
-- GPT-4o Support
-- GPT-4 Turbo Support
-- API Key Authentication
-- Adjustable Temperature
-- Interactive Streamlit UI
+* GPT Model Support
+* API Key Authentication
+* Adjustable Temperature
+* Interactive Streamlit UI
+* LangChain Integration
 
 Requirements
 
-- OpenAI API Key
-- Internet Connection
+* OpenAI API Key
+* Internet Connection
+
+---
+
+## ⚡ Groq Chatbot
+
+Features
+
+* Groq API Integration
+* Llama Model Support
+* Fast Cloud LLM Inference
+* API Key Authentication
+* Adjustable Temperature
+* Interactive Streamlit UI
+* LangChain Integration
+
+Supported Models
+
+* Llama 3.1 8B Instant
+* Llama 3.3 70B Versatile
+
+Requirements
+
+* Groq API Key
+* Internet Connection
 
 ---
 
@@ -86,37 +103,39 @@ Requirements
 
 Features
 
-- Local AI Inference
-- No API Key Required
-- Privacy Friendly
-- Open Source Models
-- Fast Local Responses
+* Local AI Inference
+* No API Key Required
+* Privacy Friendly
+* Open Source Models
+* Local LLM Execution
+* Interactive Streamlit UI
 
 Supported Models
 
-- Mistral
-- Llama 3 (optional)
-- Gemma (optional)
-- Phi-3 (optional)
+* Mistral
+* Llama
+* Gemma
+* Phi
 
 Requirements
 
-- Ollama Installed
-- Downloaded LLM Model
+* Ollama Installed
+* Downloaded LLM Model
 
 ---
 
 # 🛠 Tech Stack
 
-| Category | Technology |
-|-----------|------------|
-| Language | Python |
-| Framework | LangChain |
-| UI | Streamlit |
-| Cloud Model | OpenAI GPT |
-| Local Model | Ollama |
+| Category           | Technology         |
+| ------------------ | ------------------ |
+| Language           | Python             |
+| Framework          | LangChain          |
+| UI                 | Streamlit          |
+| Cloud Model        | OpenAI GPT         |
+| Cloud Model        | Groq Llama         |
+| Local Model        | Ollama             |
 | Prompt Engineering | ChatPromptTemplate |
-| Output Parsing | StrOutputParser |
+| Output Parsing     | StrOutputParser    |
 
 ---
 
@@ -128,7 +147,7 @@ Requirements
 git clone https://github.com/Bhumi472/End-To-End-Q-A-ChatBot-Gen-AI.git
 ```
 
-Navigate to the project
+Navigate to the project:
 
 ```bash
 cd End-To-End-Q-A-ChatBot-Gen-AI
@@ -142,44 +161,76 @@ cd End-To-End-Q-A-ChatBot-Gen-AI
 pip install -r requirements.txt
 ```
 
-or
+Or install the required packages manually:
 
 ```bash
-pip install streamlit langchain langchain-community langchain-openai python-dotenv
+pip install streamlit langchain langchain-core langchain-groq
+```
+
+For OpenAI support:
+
+```bash
+pip install langchain-openai
+```
+
+For Ollama support:
+
+```bash
+pip install langchain-community
 ```
 
 ---
 
 # 🔑 OpenAI Setup
 
-Create a `.env` file
+Create a `.env` file:
 
 ```env
 OPENAI_API_KEY=your_api_key
 LANGCHAIN_API_KEY=your_langsmith_key
 ```
 
+Make sure you never upload your API keys to GitHub.
+
+---
+
+# ⚡ Groq Setup
+
+Create a Groq API key and configure it as an environment variable:
+
+```env
+GROQ_API_KEY=your_groq_api_key
+```
+
+For Streamlit Cloud, add the API key through **Secrets / Advanced Settings**:
+
+```toml
+GROQ_API_KEY = "your_groq_api_key"
+```
+
+The Groq chatbot uses the LangChain `ChatGroq` integration.
+
 ---
 
 # 💻 Ollama Setup
 
-Install Ollama
+Install Ollama:
 
 https://ollama.com
 
-Download Mistral
+Download Mistral:
 
 ```bash
 ollama pull mistral
 ```
 
-Start Ollama
+Start Ollama:
 
 ```bash
 ollama serve
 ```
 
-Verify installation
+Verify installation:
 
 ```bash
 ollama list
@@ -189,18 +240,36 @@ ollama list
 
 # ▶ Running the OpenAI Chatbot
 
+Navigate to the OpenAI chatbot directory:
+
 ```bash
 cd "2-OpenAI Chatbot"
+```
+
+Run:
+
+```bash
 streamlit run app.py
+```
+
+---
+
+# ▶ Running the Groq Chatbot
+
+From the project root:
+
+```bash
+streamlit run groq-chatbot.py
 ```
 
 ---
 
 # ▶ Running the Ollama Chatbot
 
+From the project root:
+
 ```bash
-cd "3-Ollama Chatbot"
-streamlit run app.py
+streamlit run "ollama chatbot.py"
 ```
 
 ---
@@ -217,14 +286,61 @@ Streamlit Interface
 LangChain Prompt
       │
       ▼
-OpenAI GPT / Ollama
-      │
-      ▼
-Generated Response
-      │
-      ▼
-Display in Streamlit
+┌────────────────────────────┐
+│       Select LLM Provider  │
+├────────────────────────────┤
+│ OpenAI                     │
+│ Groq                       │
+│ Ollama                     │
+└──────────────┬─────────────┘
+               │
+               ▼
+      Generated Response
+               │
+               ▼
+       Display in Streamlit
 ```
+
+---
+
+# 🔄 LangChain Workflow
+
+The chatbot follows a simple LangChain pipeline:
+
+```text
+ChatPromptTemplate
+        │
+        ▼
+       LLM
+        │
+        ▼
+ StrOutputParser
+        │
+        ▼
+    Final Answer
+```
+
+The core chain follows:
+
+```python
+chain = prompt | llm | output_parser
+```
+
+---
+
+# 📊 Cloud vs Local AI
+
+| Feature              | OpenAI         | Groq           | Ollama        |
+| -------------------- | -------------- | -------------- | ------------- |
+| Execution            | Cloud          | Cloud          | Local         |
+| API Key              | Required       | Required       | Not Required  |
+| Internet             | Required       | Required       | Not Required* |
+| Local Inference      | ❌              | ❌              | ✅             |
+| Open Source Models   | ❌              | ✅              | ✅             |
+| Privacy              | Standard Cloud | Standard Cloud | High          |
+| Hardware Requirement | Low            | Low            | Higher        |
+
+* Internet is required to initially download Ollama models.
 
 ---
 
@@ -232,28 +348,35 @@ Display in Streamlit
 
 By completing this project, you'll learn:
 
-- LangChain Basics
-- Prompt Templates
-- Streamlit Development
-- OpenAI Integration
-- Ollama Integration
-- Local LLM Deployment
-- AI Application Development
+* LangChain Basics
+* Prompt Templates
+* Streamlit Development
+* OpenAI Integration
+* Groq Integration
+* Ollama Integration
+* Cloud LLM Integration
+* Local LLM Deployment
+* Output Parsing
+* Temperature Control
+* AI Application Development
 
 ---
 
 # 🔮 Future Improvements
 
-- Conversation Memory
-- Chat History
-- PDF Question Answering
-- RAG Pipeline
-- Vector Database Integration
-- Multiple Local Models
-- Voice Chat
-- Image Input Support
-- Docker Deployment
-- Authentication
+* Conversation Memory
+* Chat History
+* PDF Question Answering
+* RAG Pipeline
+* Vector Database Integration
+* Multiple LLM Providers
+* Multiple Local Models
+* Voice Chat
+* Image Input Support
+* Docker Deployment
+* Authentication
+* LLM Observability
+* Prompt Evaluation
 
 ---
 
@@ -275,12 +398,8 @@ This project is licensed under the MIT License.
 
 ---
 
-<div align="center">
-
 ## ⭐ Show Your Support
 
 If you enjoyed this project, please consider giving it a ⭐ on GitHub.
 
 Happy Coding! 🚀
-
-</div>
